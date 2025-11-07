@@ -1,7 +1,6 @@
 myURL = "https://striveschool-api.herokuapp.com/api/product/"
 myKey =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTBkYmRjMmY0YmQ0NzAwMTU4NWIxZjEiLCJpYXQiOjE3NjI1MTY3MTMsImV4cCI6MTc2MzcyNjMxM30.UAq_vrmGf65sg9Nl92bWinEHPUnMTrBE6LfEb94bzDk"
-
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTBkYmRjMmY0YmQ0NzAwMTU4NWIxZjEiLCJpYXQiOjE3NjI1MjU3MTcsImV4cCI6MTc2MzczNTMxN30.F7_A341Qjk9Cy9vgw7ZUbT1NaES6c8cFK_WLBdkUjQ8"
 
 const url = location.search
 const allTheParameters = new URLSearchParams(url)
@@ -19,10 +18,11 @@ const getDetails = function () {
     .then((printDetails) => {
 
       document.getElementById("name").innerText = printDetails.name
+      document.getElementById("artist").innerText = printDetails.artist
       document.getElementById("description").innerText =
         printDetails.description
       document.getElementById("price").innerText = printDetails.price + "€"
-      document.getElementById("width").innerText = printDetails.width
+      document.getElementById("img_url").innerText = printDetails.img_url
     })
     .catch((err) => {
       console.log("ERRORE NEL RECUPERO DETTAGLI", err)
