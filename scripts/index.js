@@ -10,30 +10,31 @@ const getPrints = function () {
   })
     .then((res) => {
       if (res.ok) {
-        console.log(res)
         return res.json()
       } else {
         throw new Error(`Error: ${res.status}`)
       }
     })
+
     .then((prints) => {
-      console.log(prints)
       const row = document.getElementById("prints-row")
+
       prints.forEach((print) => {
-        row.innerHTML = `
-            <div class="col">
+        const div = document.createElement("div")
+
+        div.innerHTML = `
                 <div class="card h-100 d-flex flex-column">
                     <img src=${print.img_url} class="card-img-top" alt="print preview">
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">${print.name}</h5>
-                        <p class="card-text">${print.description}</p>
+                        <p class="card-text">${print.artist}</p>
                         <p class="card-text">${print.price}</p>
-                        <p class="card-text">${print.width}</p>
+                        <p class="card-text">${print.description}</p>
                     </div>
                     <a href="./details.html?printID=${print.id}" class="btn btn-success">details</a>
                 </div>
-            </div>
         `
+        row.appendChild(div)
       })
     })
     .catch((err) => {
