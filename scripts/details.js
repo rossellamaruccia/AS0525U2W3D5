@@ -7,7 +7,11 @@ const allTheParameters = new URLSearchParams(url)
 const id = allTheParameters.get("printID")
 
 const getDetails = function () {
-  fetch(myURL + "/" + id)
+  fetch(myURL + "/" + id, {
+    headers: {
+      Authorization: myKey,
+    },
+  })
     .then((res) => {
       if (res.ok) {
         return res.json()
@@ -16,7 +20,6 @@ const getDetails = function () {
       }
     })
     .then((printDetails) => {
-
       document.getElementById("name").innerText = printDetails.name
       document.getElementById("artist").innerText = printDetails.artist
       document.getElementById("description").innerText =
@@ -34,14 +37,16 @@ getDetails()
 
 const deletePrint = function () {
   fetch(myURL + "/" + id, {
-    method: "DELETE",
+    headers: {
+      Authorization: myKey,
+      method: "DELETE",
+    },
   })
     .then((res) => {
       if (res.ok) {
         alert("item deleted")
         location.assign("./index.html")
       } else {
-
         throw new Error(`error: ${res.status}`)
       }
     })

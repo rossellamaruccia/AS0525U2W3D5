@@ -7,7 +7,11 @@ const allTheParameters = new URLSearchParams(url)
 const id = allTheParameters.get("concertID")
 
 if (id) {
-  fetch(myURL + "/" + id)
+  fetch(myURL + "/" + id, {
+    headers: {
+      Authorization: myKey,
+    },
+  })
     .then((res) => {
       if (res.ok) {
         return res.json()
@@ -27,34 +31,6 @@ if (id) {
       console.log("errore nel ripopolamento del form", err)
     })
 }
-
-// const tryUpload = function () {
-//   fetch(myURL, {
-//     headers: {
-//       Authorization: myKey,
-//       method: "POST",
-//       body: JSON.stringify({
-//         name: "Banana Cover",
-//         artist: "Velvet Underground",
-//         price: 50,
-//         img_url: "https://www.ibs.it/images/0602537153190_0_0_536_0_75.jpg",
-//         description: "cult vinyl cover print",
-//       }),
-//     },
-//   })
-//     .then((res) => {
-//       if (res.ok) {
-//         console.log(res)
-//       } else {
-//         throw new Error(`server error: ${res.status}`)
-//       }
-//     })
-//     .catch((err) => {
-//       console.log("uploading error", err)
-//     })
-// }
-
-// tryUpload()
 
 const form = document.getElementById("upload-form")
 
@@ -80,14 +56,30 @@ myForm.addEventListener("submit", (e) => {
 
   const uploadedPrint = new Print(name, artist, description, price, img_url)
 
-  fetch(myURL, {
+let method
+
+if (id) {
+  method = "PUT"
+} else {
+  method = "POST"
+}
+
+let finalUrl
+
+if (id) {
+  finalUrl = myURL + "/" + id
+} else {
+  finalUrl = myURL
+}
+
+  fetch(finalUrl, {
     headers: {
       "Content-Type": "application/json",
       Authorization:
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTBkYmRjMmY0YmQ0NzAwMTU4NWIxZjEiLCJpYXQiOjE3NjI1MjU3MTcsImV4cCI6MTc2MzczNTMxN30.F7_A341Qjk9Cy9vgw7ZUbT1NaES6c8cFK_WLBdkUjQ8",
-      method: "POST",
-      body: JSON.stringify(uploadedPrint)
-    }
+      method: method,
+      body: JSON.stringify(uploadedPrint),
+    },
   })
     .then((res) => {
       if (res.ok) {
@@ -98,6 +90,7 @@ myForm.addEventListener("submit", (e) => {
         throw new Error(`server error: ${res.status}`)
       }
     })
+
     .catch((err) => {
       console.log("uploading error", err)
     })
