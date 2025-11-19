@@ -18,20 +18,21 @@ const getPrints = function () {
 
     .then((prints) => {
       const row = document.getElementById("prints-row")
+      console.log(prints)
 
       prints.forEach((print) => {
         const div = document.createElement("div")
 
         div.innerHTML = `
                 <div class="card h-100 d-flex flex-column">
-                    <img src=${print.img_url} class="card-img-top" alt="print preview">
+                    <img src=${print.imageUrl} class="card-img-top" alt="print preview">
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">${print.name}</h5>
-                        <p class="card-text">${print.artist}</p>
+                        <p class="card-text">${print.brand}</p>
                         <p class="card-text">${print.price}</p>
                         <p class="card-text">${print.description}</p>
                     </div>
-                    <a href="./details.html?printID=${print.id}" class="btn btn-success">details</a>
+                    <a href="./detail.html?printID=${print._id}" class="btn btn-success">details</a>
                 </div>
         `
         row.appendChild(div)

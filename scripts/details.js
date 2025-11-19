@@ -6,8 +6,10 @@ const url = location.search
 const allTheParameters = new URLSearchParams(url)
 const id = allTheParameters.get("printID")
 
+let card = document.getElementById("card")
+
 const getDetails = function () {
-  fetch(myURL + "/" + id, {
+  fetch(myURL + id, {
     headers: {
       Authorization: myKey,
     },
@@ -19,24 +21,26 @@ const getDetails = function () {
         throw new Error(res.status)
       }
     })
-    .then((printDetails) => {
-      document.getElementById("name").innerText = printDetails.name
-      document.getElementById("artist").innerText = printDetails.artist
-      document.getElementById("description").innerText =
-        printDetails.description
-      document.getElementById("price").innerText = printDetails.price + "€"
-      document.getElementById("img_url").innerText = printDetails.img_url
+    .then((print) => {
+      console.log(print)
+      
+      card.innerHTML = `<img src=${print.imageUrl} class="card-img-top" alt="print preview">
+                    <div class="card-body flex-grow-1">
+                        <h5 class="card-title">${print.name}</h5>
+                        <p class="card-text">${print.brand}</p>
+                        <p class="card-text">${print.price}</p>
+                        <p class="card-text">${print.description}</p>
+                    </div>`
     })
     .catch((err) => {
       console.log("ERRORE NEL RECUPERO DETTAGLI", err)
-      document.getElementById("name").innerText = err
     })
 }
 
 getDetails()
 
 const deletePrint = function () {
-  fetch(myURL + "/" + id, {
+  fetch(myURL + id, {
     headers: {
       Authorization: myKey,
       method: "DELETE",
