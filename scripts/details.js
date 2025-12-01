@@ -1,10 +1,11 @@
 myURL = "https://striveschool-api.herokuapp.com/api/product/"
-myKey =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTBkYmRjMmY0YmQ0NzAwMTU4NWIxZjEiLCJpYXQiOjE3NjI1MjU3MTcsImV4cCI6MTc2MzczNTMxN30.F7_A341Qjk9Cy9vgw7ZUbT1NaES6c8cFK_WLBdkUjQ8"
+let myKey =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTBkYmRjMmY0YmQ0NzAwMTU4NWIxZjEiLCJpYXQiOjE3NjQ2MDYwNTgsImV4cCI6MTc2NTgxNTY1OH0.ra94zwq747t6aOwP47UJxCJjH2d9PLnWGQHMjieiIZg"
 
 const url = location.search
 const allTheParameters = new URLSearchParams(url)
 const id = allTheParameters.get("printID")
+console.log(id)
 
 let card = document.getElementById("card")
 
@@ -28,7 +29,7 @@ const getDetails = function () {
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">${print.name}</h5>
                         <p class="card-text">${print.brand}</p>
-                        <p class="card-text">${print.price}</p>
+                        <p class="card-text">${print.price} €</p>
                         <p class="card-text">${print.description}</p>
                     </div>`
     })
@@ -41,9 +42,9 @@ getDetails()
 
 const deletePrint = function () {
   fetch(myURL + id, {
+    method: "DELETE",
     headers: {
       Authorization: myKey,
-      method: "DELETE",
     },
   })
     .then((res) => {
@@ -59,6 +60,6 @@ const deletePrint = function () {
     })
 }
 
-const editPrint = function () {
-  location.assign("./backoffice.html?printID=" + id)
-}
+const detailsButton = document.getElementById('detailsButton')
+detailsButton.addEventListener('click', () => {location.assign("./backoffice.html?printID=" + id)})
+

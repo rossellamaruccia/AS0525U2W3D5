@@ -15,7 +15,7 @@
     <header>
       <nav class="navbar navbar-expand-md bg-secondary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">EpiPrints</a>
+          <a class="navbar-brand text-warning" href="#">EpiPrints</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -45,15 +45,18 @@
         </div>
       </nav>
       <h1 class="text-center my-3">EpiPrints</h1>
-      <h3 class="text-center my-3">Epic prints for your walls</h3>
+      <h3 class="text-center my-3 text-dark">Epic prints for your walls</h3>
     </header>
     <main class="flex-grow-1">
-
+     
       <div class="container">
+        <div class="row justify-content-center my-3">
+          <button class="btn btn-dark w-25 rounded-0" onclick="getPrints()">Show me</button></div>
+         
         <div
           class="row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-4 g-3"
           id="prints-row"
-        >
+        >   
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 myURL = "https://striveschool-api.herokuapp.com/api/product/"
-myKey =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTBkYmRjMmY0YmQ0NzAwMTU4NWIxZjEiLCJpYXQiOjE3NjI1MjU3MTcsImV4cCI6MTc2MzczNTMxN30.F7_A341Qjk9Cy9vgw7ZUbT1NaES6c8cFK_WLBdkUjQ8"
+let myKey =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTBkYmRjMmY0YmQ0NzAwMTU4NWIxZjEiLCJpYXQiOjE3NjQ2MDYwNTgsImV4cCI6MTc2NTgxNTY1OH0.ra94zwq747t6aOwP47UJxCJjH2d9PLnWGQHMjieiIZg"
 
 const getPrints = function () {
   fetch(myURL, {
@@ -29,10 +29,8 @@ const getPrints = function () {
                     <div class="card-body flex-grow-1">
                         <h5 class="card-title">${print.name}</h5>
                         <p class="card-text">${print.brand}</p>
-                        <p class="card-text">${print.price}</p>
-                        <p class="card-text">${print.description}</p>
                     </div>
-                    <a href="./detail.html?printID=${print._id}" class="btn btn-success">details</a>
+                    <a href="./detail.html?printID=${print._id}" class="btn btn-warning rounded-0">details</a>
                 </div>
         `
         row.appendChild(div)
@@ -42,5 +40,3 @@ const getPrints = function () {
       console.log("problem:", err)
     })
 }
-
-getPrints()
